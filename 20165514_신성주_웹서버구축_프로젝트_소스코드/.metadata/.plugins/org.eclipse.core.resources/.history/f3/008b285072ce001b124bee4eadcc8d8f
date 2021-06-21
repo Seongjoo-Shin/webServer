@@ -1,0 +1,49 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.io.PrintWriter" %>
+<%@ page import="post.Post" %>
+<%@ page import="post.Post_check" %>
+<%@ page import="post.Comment" %>
+<%@ page import="java.util.*" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>여행지 랭킹</title>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+	<% request.setCharacterEncoding("UTF-8"); %>
+	<%
+		String user_id = null;
+		if(session.getAttribute("user_id") != null){
+			user_id = (String)session.getAttribute("user_id");
+		}
+		
+		int post_id = 0;
+		if(request.getParameter("post_id") != null){
+			post_id = Integer.parseInt(request.getParameter("post_id"));
+			session.setAttribute("post_id", Integer.toString(post_id));
+		}		
+		
+		Post post1 = new Post_check().getPost(1);
+		Post post2 = new Post_check().getPost(2);
+		Post post7 = new Post_check().getPost(7);
+		Post post9 = new Post_check().getPost(9);
+		
+		Comment comm = new Post_check().getPost_id(7);
+		
+		int com_page = 1;
+		
+	%>
+	<%= post1.getLiked() %>
+	<%= post2.getLiked() %>
+	<%= post7.getLiked() %>
+	<%= post9.getLiked() %>
+	
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="js/bootstrap.js"></script>
+</body>
+</html>
+
+
